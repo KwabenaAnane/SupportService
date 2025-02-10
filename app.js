@@ -1,4 +1,5 @@
 import { User } from './user.js';
+import { HttpClient } from './helpers/httpClient.js';
 
 const form = document.querySelector('form');
 
@@ -16,10 +17,13 @@ const handleSubmit = (e) => {
   const description = data.get('description');
 
   const user = new User(email, caption, description); //creating a new user instance
+  const httpClient = new HttpClient();
+  const result = httpClient.post('issues', user);
 
   console.log(email, caption, description);
+  console.log(result);
 };
-issues.push(user);
+
 console.log(issues);
 
 document.addEventListener('DOMContentLoaded', initApp);
